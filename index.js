@@ -4,9 +4,10 @@ var WildEmitter = require('wildemitter');
 var webrtc = require('webrtcsupport');
 
 var BaseSession = require('jingle-session');
-var MediaSession = require('jingle-media-session');
 var FileSession = require('jingle-filetransfer-session');
-
+var MediaSession = function() {
+  throw new Error('MediaSession is unsupported on node.js');
+}
 
 function SessionManager(conf) {
     WildEmitter.call(this);
