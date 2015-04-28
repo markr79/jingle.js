@@ -21,15 +21,16 @@ function SessionManager(conf) {
     this.peers = {};
 
     this.prepareSession = conf.prepareSession || function (opts) {
-        if (opts.descriptionTypes.indexOf('rtp') >= 0) {
-            return new MediaSession(opts);
-        }
+        /* Media is not supported on node-webrtc */
+        // if (opts.descriptionTypes.indexOf('rtp') >= 0) {
+        //     return new MediaSession(opts);
+        // }
         if (opts.descriptionTypes.indexOf('filetransfer') >= 0) {
             return new FileSession(opts);
         }
     };
 
-    this.screenSharingSupport = webrtc.screenSharing;
+    this.screenSharingSupport = webrtc.supportScreenSharing;
 
     this.capabilities = [
         'urn:xmpp:jingle:1'
@@ -66,8 +67,8 @@ function SessionManager(conf) {
             ]
         },
         media: {
-            audio: true,
-            video: true
+            audio: false,
+            video: false
         }
     };
 
